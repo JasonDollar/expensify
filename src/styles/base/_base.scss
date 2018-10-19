@@ -1,0 +1,30 @@
+
+* {
+  // margin: 0;
+  // padding: 0px;
+  box-sizing: inherit;
+  
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-size: $m-size;
+  font-family: Lato, Helvetica,Arial, sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+.is-active {
+  font-weight: bold;
+  
+}
