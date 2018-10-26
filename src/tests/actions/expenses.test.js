@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { addExpense, removeExpense, editExpense } from '../../actions/expenses'
 
 test('remove expense', () => {
@@ -6,7 +7,7 @@ test('remove expense', () => {
     type: 'REMOVE_EXPENSE',
     id: '123ase'
   })
-})
+}) 
 
 test('edit expense', ()=> {
   const action = editExpense('asdf' , 'lol' )
