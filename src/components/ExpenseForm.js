@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import {SingleDatePicker} from 'react-dates'
-import 'react-dates/lib/css/_datepicker.css';
+
 import 'react-dates/initialize';//potrzebne bo najnowsza wersja react-dates wymaga
 
 // const now = moment()
@@ -60,7 +60,7 @@ export class ExpenseForm extends Component {
   render() {
     return (
       <div>
-        {this.state.error && <p>this.state.error</p>}
+        {this.state.error && <p>{this.state.error}</p>}
         <form onSubmit={this.onSubmit}>
           <input type="text" placeholder="description" autoFocus value={this.state.description} onChange={this.onDescriptionChange}/>
           <input type="number" placeholder="amount" value={this.state.amount} onChange={this.onAmountChange}/>
