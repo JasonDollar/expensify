@@ -41,13 +41,7 @@ store.dispatch(addExpense({
   amount: 1023,
   createdAt: Date.now()
 }))
-store.dispatch(addExpense({
-  id: uuid(),
-  description: 'sex',
-  note: null,
-  amount: 150,
-  createdAt: Date.now() + 213213312321
-}))
+
 
 store.dispatch(setTextFilter(''))
 

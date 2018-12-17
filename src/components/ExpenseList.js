@@ -1,9 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import numeral from 'numeral'
 import ExpenseListItem from './ExpenseListItem'
 import selectExpenses from '../selectors/expenses'
 
+
+
 export const ExpenseList = ({ expenses }) => {
+  
   return (
     <div>
       <h1>Expense List</h1> 
@@ -16,10 +20,9 @@ export const ExpenseList = ({ expenses }) => {
               key={item.id} 
               {...item}
             />
-          ))
+            ))
         )
       }
-      {}
     </div>
   )
 }
