@@ -1,8 +1,10 @@
 // entry -> output
 const path = require('path')
 
-module.exports = { 
-  entry: './src/App.js',
+module.exports = (env) => {
+  const isProduction = env === 'production'
+  return {
+    entry: './src/App.js',
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
@@ -26,5 +28,8 @@ module.exports = {
     contentBase: path.join(__dirname, 'public'),
     historyApiFallback: true
   }
+  }
 }
+
+
 
