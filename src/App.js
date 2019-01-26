@@ -1,18 +1,18 @@
-
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import uuid from 'uuid'
 import { Provider } from 'react-redux'
 import AppRouter from './routers/AppRouter'
 import configureStore from './store/configureStore'
+
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
 import 'react-dates/lib/css/_datepicker.css'
 import {
   addExpense,  
   removeExpense, 
-  editExpense
+  editExpense,
+  startSetExpenses
 } from './actions/expenses'
 import {
   setTextFilter,
@@ -22,6 +22,7 @@ import {
   setEndDay
 } from './actions/filters'
 import getVisibleExpense from './selectors/expenses'
+import './firebase/firebase'
 
  
 
@@ -53,4 +54,8 @@ const jsx = (
   </Provider>
 )
   
-  ReactDOM.render(  jsx , document.getElementById('app'))
+  ReactDOM.render(  <p>Loading</p> , document.getElementById('app'))
+
+  store.dispatch(startSetExpenses()).then(() => {
+    ReactDOM.render(  jsx , document.getElementById('app'))
+  })
