@@ -59,23 +59,27 @@ export class ExpenseForm extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.onSubmit}>
-          <input type="text" placeholder="description" autoFocus value={this.state.description} onChange={this.onDescriptionChange}/>
-          <input type="number" placeholder="amount" value={this.state.amount} onChange={this.onAmountChange}/>
-          <SingleDatePicker 
-            date={this.state.createdAt}
-            onDateChange={this.onDateChange}
-            focused={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-          />
-          <textarea placeholder="add a note for yout expense (optional)" value={this.state.note} onChange={this.onNoteChange}></textarea>
-          <button>Add expense</button>
+        
+        <form onSubmit={this.onSubmit} className="form">
+          {this.state.error && <p className="form__error">{this.state.error}</p>}
+          <input type="text" placeholder="description" autoFocus value={this.state.description} onChange={this.onDescriptionChange} className="text-input"/>
+          <input type="number" placeholder="amount" value={this.state.amount} onChange={this.onAmountChange} className="text-input"/>
+          <div className="data-picker">
+            <SingleDatePicker 
+              date={this.state.createdAt}
+              onDateChange={this.onDateChange}
+              focused={this.state.calendarFocused}
+              onFocusChange={this.onFocusChange}
+              numberOfMonths={1}
+              isOutsideRange={() => false}
+              block
+            />
+          </div>
+          <textarea className="textarea" placeholder="add a note for yout expense (optional)" value={this.state.note} onChange={this.onNoteChange}></textarea>
+          <div>
+            <button className="button">Save expense</button>
+          </div>
         </form>
-      </div>
     )
   }
 }

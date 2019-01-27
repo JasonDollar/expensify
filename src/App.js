@@ -2,60 +2,59 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import uuid from 'uuid'
 import { Provider } from 'react-redux'
-import AppRouter from './routers/AppRouter'
+import AppRouter, { history } from './routers/AppRouter'
 import configureStore from './store/configureStore'
+import LoadingPage from './components/LoadingPage'
 
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
 import 'react-dates/lib/css/_datepicker.css'
 import {
-  addExpense,  
-  removeExpense, 
-  editExpense,
+
   startSetExpenses
 } from './actions/expenses'
 import {
-  setTextFilter,
-  sortByDate,
-  sortByAmount,
-  setStartDay,
-  setEndDay
-} from './actions/filters'
+  login, logout,
+
+} from './actions/auth'
 import getVisibleExpense from './selectors/expenses'
-import './firebase/firebase'
+import { firebase } from './firebase/firebase'
 
  
-
 const store = configureStore()
 
-store.dispatch(addExpense({
-  id: 238764,
-  description: 'water bill',
-  note: null,
-  amount: 2134,
-  createdAt: Date.now()
-}))
-store.dispatch(addExpense({
-  id: uuid(),
-  description: 'rent',
-  note: null,
-  amount: 1023,
-  createdAt: Date.now()
-}))
-
-
-store.dispatch(setTextFilter(''))
-
-console.log(store.getState())
 
 const jsx = (
   <Provider store={store}>
     <AppRouter />
   </Provider>
 )
-  
-  ReactDOM.render(  <p>Loading</p> , document.getElementById('app'))
 
-  store.dispatch(startSetExpenses()).then(() => {
+let hasRendered = false
+const renderApp = () => {
+  if (!hasRendered) {
     ReactDOM.render(  jsx , document.getElementById('app'))
-  })
+    hasRendered = true
+  }
+}
+  
+ReactDOM.render(  <LoadingPage /> , document.getElementById('app'))
+
+
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    store.dispatch(login(user.uid))
+    console.log(user.uid)
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp()
+      if (history.location.pathname === '/') {
+        history.push('/dashboard')
+      }
+    })
+  } else {
+    store.dispatch(logout())
+    renderApp()
+    history.push('/')
+  }
+})

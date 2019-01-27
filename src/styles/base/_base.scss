@@ -6,14 +6,20 @@
   
 }
 
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
 html {
   font-size: 62.5%;
 }
 
 body {
+  color: $dark-grey;
   box-sizing: border-box;
   font-size: $m-size;
   font-family: Lato, Helvetica,Arial, sans-serif;
+  line-height: 1.6;
 }
 
 button {
